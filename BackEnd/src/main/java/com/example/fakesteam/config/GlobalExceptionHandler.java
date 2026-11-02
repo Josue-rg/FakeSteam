@@ -1,6 +1,5 @@
 package com.example.fakesteam.config;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,12 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<String> handleDataAccessException(DataAccessException ex) {
-        return ResponseEntity
-            .status(500)
-            .body("Error de acceso a datos: " + ex.getMessage() + 
-                  "\nCausa: " + (ex.getCause() != null ? ex.getCause().getMessage() : "Desconocida"));
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
@@ -22,4 +18,4 @@ public class GlobalExceptionHandler {
             .status(500)
             .body("Error: " + ex.getMessage());
     }
-} 
+}

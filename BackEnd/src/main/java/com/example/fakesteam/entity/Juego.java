@@ -1,20 +1,29 @@
 package com.example.fakesteam.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 
-@Document(collection = "juegos")
+@Entity
+@Table(name = "juegos")
 public class Juego {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private double precio;
+    // La imagen se almacena en la misma BD (tipo bytea)
+    @Lob
     private byte[] img;
     private String categoria;
 
     public Juego() {}
 
-    public Juego(String id, String nombre, double precio, byte[] img, String categoria) {
+    public Juego(Long id, String nombre, double precio, byte[] img, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -23,8 +32,8 @@ public class Juego {
     }
 
     // Getters y Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

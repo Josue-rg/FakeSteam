@@ -1,19 +1,26 @@
 package com.example.fakesteam.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Document(collection = "usuarios")
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String correo;
+    @Column(name = "contraseña")
     private String contraseña;
 
     public Usuario() {}
 
-    public Usuario(String id, String nombre, String correo, String contraseña) {
+    public Usuario(Long id, String nombre, String correo, String contraseña) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -21,8 +28,8 @@ public class Usuario {
     }
 
     // Getters y Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

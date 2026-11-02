@@ -1,0 +1,14 @@
+# Credenciales - NUNCA subir
+.env
+BackEnd/.env
+FrontEnd/.env
+
+# Dependencias y builds
+BackEnd/target/
+FrontEnd/node_modules/
+FrontEnd/dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
